@@ -1,6 +1,7 @@
 name: Deploy Application to Server
 
 on:
+  workflow_dispatch:
   push:
     branches:
       - main
@@ -61,7 +62,7 @@ jobs:
             BACKEND_IMAGE_TAG=${IMAGE_TAG}
             BACKEND_HOST_PORT=${HOST_PORT}
             EOF
-            echo ${{ secrets.DOCKER_HUB_TOKEN }} | docker login --username ${{ secrets.DOCKER_HUB_USERNAME }} --password-stdin
-            docker compose -p "backend-${IMAGE_TAG}" down
-            docker compose -p "backend-${IMAGE_TAG}" pull
-            docker compose -p "backend-${IMAGE_TAG}" up -d
+            echo ${{ secrets.DOCKER_HUB_TOKEN }} | sudo docker login --username ${{ secrets.DOCKER_HUB_USERNAME }} --password-stdin
+            sudo docker compose -p "backend-${IMAGE_TAG}" down
+            sudo docker compose -p "backend-${IMAGE_TAG}" pull
+            sudo docker compose -p "backend-${IMAGE_TAG}" up -d
