@@ -1,0 +1,7 @@
+services:
+  backend:
+    image: ${DOCKER_HUB_USERNAME:-your-docker-user}/234-deploylab-backend:${BACKEND_IMAGE_TAG:-latest}
+    pull_policy: always
+    ports:
+      - "${BACKEND_HOST_PORT:-8082}:8080"
+    restart: unless-stopped
