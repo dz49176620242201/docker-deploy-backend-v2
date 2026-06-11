@@ -35,7 +35,7 @@ jobs:
           tags: ${{ secrets.DOCKER_HUB_USERNAME }}/234-deploylab-backend:${{ github.ref_name == 'main' && 'latest' || 'alt' }}
 
       - name: Copy compose file via ssh
-        if: github.event_name == 'push'
+        if: github.event_name != 'pull_request'
         uses: appleboy/scp-action@v1
         with:
           host: ${{ secrets.HOST_SERVER }}
@@ -46,7 +46,7 @@ jobs:
           target: "/home/ubuntu/backend-${{ github.ref_name == 'main' && 'latest' || 'alt' }}"
 
       - name: Docker compose
-        if: github.event_name == 'push'
+        if: github.event_name != 'pull_request'
         uses: appleboy/ssh-action@v1.2.4
         with:
           host: ${{ secrets.HOST_SERVER }}
