@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 public class GradeServiceImpl implements GradeService {
     @Override
     public String getGrade(double score) {
+        // Lab11 verification marker for student 20242201.
         // Baseline grade criteria used by the primary deployment.
         if (score > 79.5) {
             return "A";
